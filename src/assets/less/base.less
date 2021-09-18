@@ -1,0 +1,60 @@
+@import './reset.less';
+@import './mixin.less';
+
+// flex布局
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+// 遍历出一些 class：padding margin（0-40px）
+// 例：.m20 => margin: 20px;  .ml6 => margin-left: 6px;
+.loop(40); // 调用循环
+
+.loop(@i) when (@i > 0) {
+    .loop((@i - 1)); // 递归调用自身
+
+    @size: ~'@{i}rpx';
+
+    .m@{i} {
+        margin: @size;
+    }
+    .p@{i} {
+        padding: @size;
+    }
+    .mt@{i} {
+        margin-top: @size;
+    }
+    .pt@{i} {
+        padding-top: @size;
+    }
+    .ml@{i} {
+        margin-left: @size;
+    }
+    .pl@{i} {
+        padding-left: @size;
+    }
+    .mr@{i} {
+        margin-right: @size;
+    }
+    .pr@{i} {
+        padding-right: @size;
+    }
+    .mb@{i} {
+        margin-bottom: @size;
+    }
+    .pb@{i} {
+        padding-bottom: @size;
+    }
+}

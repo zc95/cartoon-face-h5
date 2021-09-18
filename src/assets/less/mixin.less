@@ -1,0 +1,111 @@
+// less 混合方法
+
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: ' ';
+    clear: both;
+}
+
+.text-overflow(@line:1) when (@line > 1) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: @line;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+}
+
+.text-overflow(@line:1) when (@line <= 1) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gradient(@from,@to,@deg:90deg) {
+    background: -webkit-gradient(@deg, color-stop(0%, @from), color-stop(100%, @to));
+    background: -webkit-linear-gradient(@deg, @from 0%, @to 100%);
+    background: linear-gradient(@deg, @from 0%, @to 100%);
+}
+
+.rotatebox(@value:90) {
+    transform: rotate(@value);
+    -moz-transform: rotate(@value); /* Firefox */
+    transform: rotate(@value); /* Safari 和 Chrome */
+}
+
+.retinaborder(@color: #dcdcdc, @direction, @selector) when(@direction = v) and (@selector = before) {
+    @media (-webkit-min-device-pixel-ratio: 2) {
+        border-left: none;
+        position: relative;
+        overflow: hidden;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            transform: scaleX(0.5);
+            transform-origin: 0 0;
+            background: @color;
+        }
+    }
+}
+.retinaborder(@color: #dcdcdc, @direction, @selector) when(@direction = v) and (@selector = after) {
+    @media (-webkit-min-device-pixel-ratio: 2) {
+        border-right: none;
+        position: relative;
+        overflow: hidden;
+        &:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            transform: scaleX(0.5);
+            transform-origin: right 0;
+            background: @color;
+        }
+    }
+}
+.retinaborder(@color: #dcdcdc, @direction, @selector) when(@direction = h) and (@selector = before) {
+    @media (-webkit-min-device-pixel-ratio: 2) {
+        border-top: none;
+        position: relative;
+        overflow: hidden;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 1px;
+            width: 100%;
+            transform: scaleY(0.5);
+            transform-origin: 0 0;
+            background: @color;
+        }
+    }
+}
+.retinaborder(@color: #dcdcdc, @direction, @selector) when(@direction = h) and (@selector = after) {
+    @media (-webkit-min-device-pixel-ratio: 2) {
+        border-bottom: none;
+        position: relative;
+        overflow: hidden;
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 1px;
+            width: 100%;
+            transform: scaleY(0.5);
+            transform-origin: 0 bottom;
+            background: @color;
+        }
+    }
+}
