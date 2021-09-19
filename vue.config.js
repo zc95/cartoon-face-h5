@@ -12,13 +12,16 @@ module.exports = {
     devServer: {
         port: '8080', // 开发模式的端口号
         open: true, //浏览器自动打开页面
-        // proxy: {
-        //   "/Api": {
-        //     target: "http://10.101.20.41:8300", // 改成自己的目标服务器
-        //     secure: true, // 接受对方是https的接口
-        //     changeOrigin: true
-        //   }
-        // }
+        proxy: {
+            '/bd-api': {
+                target: 'https://aip.baidubce.com', // 改成自己的目标服务器
+                secure: true, // 接受对方是https的接口
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/bd-api': '/',
+                },
+            },
+        },
     },
     css: {
         requireModuleExtension: true,
